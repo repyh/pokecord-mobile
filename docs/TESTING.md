@@ -1,6 +1,6 @@
 # Draft testing strategy
 
-No test suite or CI exists yet. These are implementation requirements.
+Implemented: API/config unit tests and PostgreSQL migration/readiness integration tests. `bun run check`, `bun run test:integration` (with a disposable TEST_DATABASE_URL), `bun run mobile:check` and `bun run mobile:export` are runnable. CI and physical-device testing remain pending. The table below describes the complete target coverage, including unimplemented walking behavior.
 
 | Layer | Coverage | Proposed tool/evidence |
 | --- | --- | --- |
