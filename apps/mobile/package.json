@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "dependencies": {
+    "@pokecord/contracts": "workspace:*",
     "expo": "~57.0.27",
     "expo-dev-client": "~57.0.19",
     "expo-location": "~57.0.20",
@@ -25,8 +26,8 @@
     "typecheck": "tsc --noEmit",
     "doctor": "bunx expo-doctor@1.19.4",
     "export:android": "expo export --platform android",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "private": true

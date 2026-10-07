@@ -1,5 +1,6 @@
+import { ReadinessResponse } from '@pokecord/contracts';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
@@ -9,7 +10,7 @@ export default function App() {
   const [status, setStatus] = useState('Ready to connect');
   const [busy, setBusy] = useState(false);
 
-  async function checkConnection() {
+  const checkConnection = useCallback(async () => {
     if (!apiUrl) {
       setStatus(
         'Set EXPO_PUBLIC_API_URL in apps/mobile/.env to connect your backend.',
@@ -24,6 +25,7 @@ export default function App() {
         signal: controller.signal,
       });
       if (!response.ok) throw new Error('Backend is not ready');
+      ReadinessResponse.parse(await response.json());
       setStatus('Connected · backend and database ready');
     } catch {
       setStatus(
@@ -33,7 +35,11 @@ export default function App() {
       clearTimeout(timer);
       setBusy(false);
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    void checkConnection();
+  }, [checkConnection]);
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.page}>
