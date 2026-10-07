@@ -28,7 +28,9 @@ For the browser preview: `bun run --cwd apps/mobile start --web --port 8081`, th
 
 For Android: install a development build first (`bunx eas-cli build --platform android --profile development` from `apps/mobile`, after Expo login/project setup), then connect its launcher to Metro. `bun run dev:field` uses a Metro tunnel for field development. EAS account/project setup and a physical phone build have not yet been verified.
 
-Copy `apps/mobile/.env.example` to `.env` in that same directory and set the real staging HTTPS URL. For local phone debugging, use your PC's LAN address instead of localhost. Restart Metro after environment changes. No staging URL is preconfigured. The browser preview's backend check additionally requires browser CORS support, which is not enabled in this native-first foundation.
+Copy `apps/mobile/.env.example` to `.env` in that same directory and set the real staging HTTPS URL. For local phone debugging, use your PC's LAN address instead of localhost. Restart Metro after environment changes; use `--clear` when exporting after a URL change to avoid a stale embedded address. No staging URL is preconfigured. Browser clients must be listed as exact origins in the server's comma-separated `BROWSER_ORIGINS` setting; the example enables localhost preview only. The app automatically checks readiness and validates the API response using the shared contract.
+
+When the phone is on another network, both the API and Metro need reachable HTTPS endpoints. A Metro tunnel alone does not expose the API. `bun run dev:field` uses the pinned Expo ngrok development helper. Temporary test URLs stop working when their local server/tunnel stops; use Dokploy staging for regular field development.
 
 ## Verify
 
