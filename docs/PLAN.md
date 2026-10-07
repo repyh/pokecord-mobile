@@ -1,6 +1,6 @@
 # Draft implementation plan
 
-Status: planning foundation, 2026-10-07. Existing target directory inspected and found empty. Bun replaces the earlier pnpm preference. No application has been scaffolded.
+Status: runnable foundation, 2026-10-07. Bun workspaces, Expo SDK 57 starter screen, Fastify health/readiness, PostgreSQL Compose and checksummed transactional migrations are implemented. Local checks, PostgreSQL integration, Expo compatibility and Android export passed. CI, deployment image/Dokploy and physical-phone build remain pending. Walking behavior is not implemented yet. Bun replaces the earlier pnpm preference.
 
 ## Architecture
 

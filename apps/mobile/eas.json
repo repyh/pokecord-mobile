@@ -1,0 +1,16 @@
+{
+  "cli": { "appVersionSource": "local" },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "bun": "1.4.2",
+      "android": { "buildType": "apk" }
+    },
+    "preview": {
+      "distribution": "internal",
+      "bun": "1.4.2",
+      "android": { "buildType": "apk" }
+    }
+  }
+}
