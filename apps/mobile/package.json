@@ -24,6 +24,7 @@
   "scripts": {
     "start": "expo start --dev-client",
     "field": "expo start --dev-client --tunnel",
+    "go": "expo start --go --tunnel",
     "typecheck": "tsc --noEmit",
     "doctor": "bunx expo-doctor@1.19.4",
     "export:android": "expo export --platform android",

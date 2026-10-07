@@ -32,6 +32,10 @@ Copy `apps/mobile/.env.example` to `.env` in that same directory and set the rea
 
 When the phone is on another network, both the API and Metro need reachable HTTPS endpoints. A Metro tunnel alone does not expose the API. `bun run dev:field` uses the pinned Expo ngrok development helper. Temporary test URLs stop working when their local server/tunnel stops; use Dokploy staging for regular field development.
 
+## Quick phone test with Expo Go
+
+Run `bun run dev:go` from the repository root and scan the displayed QR code in Expo Go on Android. This explicitly selects Expo Go even though expo-dev-client is installed. The tunnel works across different networks, while the API URL in `apps/mobile/.env` must also be publicly reachable via HTTPS. The starter screen and backend check work in Expo Go; background location/native notification integration still needs a development build later. Use [Expo Go for SDK 57](https://expo.dev/go?device=true&platform=android&sdkVersion=57) if the installed Expo Go reports a version mismatch.
+
 ## Verify
 
 `bun run check` runs lint, strict type checking and API tests. `bun run mobile:check` checks Expo compatibility; `bun run mobile:export` verifies Android bundling.
