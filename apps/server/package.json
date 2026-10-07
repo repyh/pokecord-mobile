@@ -10,6 +10,7 @@
     "db:migrate": "bun src/migrate.ts"
   },
   "dependencies": {
+    "@fastify/cors": "11.3.0",
     "@pokecord/contracts": "workspace:*",
     "fastify": "5.12.5",
     "postgres": "3.4.9",

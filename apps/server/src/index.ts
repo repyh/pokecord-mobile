@@ -7,6 +7,7 @@ const sql = connectDatabase(config.DATABASE_URL);
 const app = createApp({
   checkDatabase: () => checkDatabase(sql),
   logger: true,
+  browserOrigins: config.BROWSER_ORIGINS,
 });
 app.addHook('onClose', async () => {
   await sql.end({ timeout: 5 });

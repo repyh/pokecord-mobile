@@ -46,3 +46,24 @@ test('invalid configuration fails without exposing secrets', () => {
     readConfig({ DATABASE_URL: 'postgres://user:pass@localhost/db' }).PORT,
   ).toBe(3000);
 });
+
+test('browser readiness allows configured origins only', async () => {
+  const origin = 'http://localhost:8081';
+  const app = createApp({
+    checkDatabase: async () => '001_baseline.sql',
+    browserOrigins: [origin],
+  });
+  try {
+    const allowed = await app.inject({ url: '/ready', headers: { origin } });
+    expect(allowed.headers['access-control-allow-origin']).toBe(origin);
+    const denied = await app.inject({
+      url: '/ready',
+      headers: { origin: 'https://other.example' },
+    });
+    expect(denied.headers['access-control-allow-origin']).toBeUndefined();
+    const native = await app.inject('/ready');
+    expect(native.statusCode).toBe(200);
+  } finally {
+    await app.close();
+  }
+});

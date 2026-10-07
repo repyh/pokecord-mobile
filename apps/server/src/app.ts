@@ -1,15 +1,23 @@
+import cors from '@fastify/cors';
 import { API_VERSION } from '@pokecord/contracts';
 import Fastify from 'fastify';
 
 export function createApp(options: {
   checkDatabase: () => Promise<string>;
   logger?: boolean;
+  browserOrigins?: string[];
 }) {
   const app = Fastify({
     logger: options.logger ?? false,
     bodyLimit: 32 * 1024,
     requestTimeout: 10_000,
     logController: new Fastify.LogController({ disableRequestLogging: true }),
+  });
+
+  app.register(cors, {
+    origin: options.browserOrigins ?? [],
+    methods: ['GET'],
+    credentials: false,
   });
 
   app.get('/health', async () => ({ status: 'ok', apiVersion: API_VERSION }));

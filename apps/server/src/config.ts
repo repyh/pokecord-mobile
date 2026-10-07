@@ -8,6 +8,26 @@ const Environment = z.object({
   PORT: z.coerce.number().int().min(1).max(65535).default(3000),
   HOST: z.string().min(1).default('0.0.0.0'),
   APP_ENV: z.enum(['local', 'staging', 'production']).default('local'),
+  BROWSER_ORIGINS: z
+    .string()
+    .default('')
+    .transform((value) =>
+      value
+        .split(',')
+        .map((origin) => origin.trim())
+        .filter(Boolean),
+    )
+    .pipe(
+      z.array(
+        z
+          .string()
+          .url()
+          .refine(
+            (value) => new URL(value).origin === value,
+            'Use an exact HTTP origin',
+          ),
+      ),
+    ),
 });
 
 export function readConfig(
