@@ -5,7 +5,7 @@
 1. Inspect `git status`, branch, remotes and existing changes. Update clean main with a fast-forward fetch/pull; do not overwrite local work.
 2. Create a focused branch such as `feat/walking-events`, `fix/location-retries` or `docs/field-checklist`.
 3. Implement one reviewable slice with tests and related documentation. Review the diff and staged contents for secrets, personal location data, unrelated files and generated artifacts.
-4. Commit coherent changes with intent in the message. Push the branch and open a draft PR early for substantial work. Never force-push main; avoid rewriting shared feature history without coordination.
+4. Make micro commits throughout the task: one small, coherent, verified purpose per commit, with related tests/docs. Inspect each staged diff and run slice-appropriate checks before committing. Keep intermediate states usable; do not split an atomic change into broken commits. Push the branch and open a draft PR early for substantial work. Never force-push main; avoid rewriting shared feature history without coordination.
 5. PR description states problem, resulting behavior, verification, device evidence when relevant, migration/deployment implications and known limitations. Link any tracked debt.
 6. Resolve checks and review findings. Merge only with user authorization; prefer squash merge and delete the completed branch. Deploy staging from a known merged commit and record the smoke test.
 
